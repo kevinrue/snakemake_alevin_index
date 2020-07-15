@@ -4,6 +4,10 @@
 
 report: "report/workflow.rst"
 
+localrules: all,
+    genome, transcriptome, genesets, 
+    decoys, gentrome
+
 # Allow users to fix the underlying OS via singularity.
 singularity: "docker://continuumio/miniconda3"
 

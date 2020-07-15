@@ -8,14 +8,10 @@ message("Started")
 #
 gtf_file <- snakemake@input[['gtf']]
 tgmap_file <- snakemake@output[[1]]
-renv <- snakemake@params[['renv']]
 
 #
 # Manage R packages
 #
-if (renv) {
-	renv::activate()
-}
 library(rtracklayer)
 library(tidyverse)
 
