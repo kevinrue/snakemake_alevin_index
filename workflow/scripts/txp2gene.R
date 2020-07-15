@@ -1,3 +1,6 @@
+#
+# Prolog
+#
 message("Started")
 
 #
@@ -30,5 +33,8 @@ tg_map <- unique(tg_map)
 
 write.table(tg_map, tgmap_file, quote = FALSE, sep = '\t', row.names = FALSE, col.names = FALSE)
 
+#
+# Epilog
+#
 sessioninfo::session_info()
 message("Completed")
