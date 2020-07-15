@@ -31,7 +31,7 @@ rule genesets:
 
 rule decoys:
     input:
-        'resources/genome.fa.gz'
+        rules.genome.output
     output:
         'resources/decoys.txt'
     shell:
@@ -42,10 +42,10 @@ rule decoys:
         '''
 
 
-rule concatenate_genome_transcriptome:
+rule gentrome:
     input:
-        genome='resources/genome.fa.gz',
-        transcriptome='resources/transcriptome.fa.gz'
+        genome=rules.genome.output,
+        transcriptome=rules.transcriptome.output
     output:
         'resources/gentrome.fa.gz'
     shell:
@@ -56,8 +56,8 @@ rule concatenate_genome_transcriptome:
 
 rule salmon_index:
     input:
-        gentrome='resources/gentrome.fa.gz',
-        decoys='resources/decoys.txt'
+        gentrome=rules.gentrome.output,
+        decoys=rules.decoys.output
     output:
         directory('resources/salmon_index')
     params:
@@ -67,20 +67,25 @@ rule salmon_index:
     threads: config['salmon']['threads']
     resources:
         mem_free_gb=f"{config['salmon']['memory_per_cpu']}"
-    log: 'resources/salmon_index.log'
+    log:
+        out='results/logs/salmon_index/out',
+        err='results/logs/salmon_index/err',
+        time='results/logs/time/salmon_index'
     shell:
         '''
-        salmon index -t {input.gentrome} -d {input.decoys} -p {params.threads} -i {output} 2> {log}
+        {DATETIME} > {log.time} &&
+        salmon index -t {input.gentrome} -d {input.decoys} -p {params.threads} -i {output} 2> {log} &&
+        {DATETIME} >> {log.time}
         '''
 
 
 rule transcript_gene_map:
     input:
-        gtf='resources/genesets.gtf.gz'
+        gtf=rules.genesets.output
     output:
         tgmap='resources/txp2gene.tsv'
-    params:
-        renv=config['renv']
+    conda:
+        "../envs/r.yaml"
     log: script="results/logs/transcript_gene_map.log"
     script:
         "../scripts/txp2gene.R"
