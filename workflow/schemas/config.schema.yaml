@@ -6,9 +6,28 @@ type: object
 
 # possible entries of the config file and which type they should be
 properties:
-  samples:
-    type: string
+
+  salmon:
+    type: object
+    properties:
+      genome:
+        type: string
+      transcriptome:
+        type: string
+      genesets:
+        type: string
+      threads:
+        type: integer
+      memory_per_cpu:
+        type: integer
+    required:
+      - genome
+      - transcriptome
+      - genesets
+      - threads
+      - memory_per_cpu
+
 
 # entries that have to be in the config file for successful validation
 required:
-  - samples
+  - salmon
