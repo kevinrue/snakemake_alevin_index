@@ -5,10 +5,5 @@ channels:
 dependencies:
   - r-base=4.0
   - r-tidyverse
-  - bioconductor-tximport
-  - bioconductor-fishpond
-  - bioconductor-delayedmatrixstats
   - bioconductor-rtracklayer
-  - r-cowplot
-  - r-svglite
   - r-sessioninfo
