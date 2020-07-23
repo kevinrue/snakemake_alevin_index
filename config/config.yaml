@@ -1,4 +1,13 @@
 # This file should contain everything to configure the workflow on a global scale.
 # In case of sample based data, it should be complemented by a samples.tsv file that contains
 # one row per sample. It can be parsed easily via pandas.
-samples: "config/samples.tsv"
+salmon:
+    # URL to a genome assembly (fasta)
+    genome: "ftp://ftp.ensembl.org/pub/release-100/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.toplevel.fa.gz"
+    # URL to transcript assembly (fasta)
+    transcriptome: "ftp://ftp.ensembl.org/pub/release-100/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz"
+    # URL to a collection of gene sets (gtf)
+    genesets: "ftp://ftp.ensembl.org/pub/release-100/gtf/homo_sapiens/Homo_sapiens.GRCh38.100.chr_patch_hapl_scaff.gtf.gz"
+    # resources
+    threads: 12
+    memory_per_cpu: 2

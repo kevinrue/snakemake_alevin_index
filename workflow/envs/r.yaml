@@ -1,0 +1,9 @@
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - r-base=4.0
+  - r-tidyverse
+  - bioconductor-rtracklayer
+  - r-sessioninfo
