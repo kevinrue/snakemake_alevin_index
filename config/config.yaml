@@ -9,5 +9,5 @@ salmon:
     # URL to a collection of gene sets (gtf)
     genesets: "ftp://ftp.ensembl.org/pub/release-100/gtf/homo_sapiens/Homo_sapiens.GRCh38.100.chr_patch_hapl_scaff.gtf.gz"
     # resources
-    threads: 12
+    threads: 24
     memory_per_cpu: 2

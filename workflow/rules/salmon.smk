@@ -59,7 +59,7 @@ rule salmon_index:
         gentrome=rules.gentrome.output,
         decoys=rules.decoys.output
     output:
-        directory('resources/salmon_index')
+        directory('results/salmon_index')
     params:
         threads=config['salmon']['threads']
     conda:
@@ -83,9 +83,9 @@ rule transcript_gene_map:
     input:
         gtf=rules.genesets.output
     output:
-        tgmap='resources/txp2gene.tsv'
+        tgmap='results/txp2gene.tsv'
     conda:
         "../envs/r.yaml"
-    log: script="results/logs/transcript_gene_map.log"
+    log: script="results/logs/txp2gene.log"
     script:
         "../scripts/txp2gene.R"
